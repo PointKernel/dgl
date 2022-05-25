@@ -204,6 +204,23 @@ else(USE_CUDA)
   add_library(dgl SHARED ${DGL_SRC})
 endif(USE_CUDA)
 
+if(USE_CUDA)
+  include(cmake/util/CPM.cmake)
+
+  CPMAddPackage(
+     NAME cuco
+     GITHUB_REPOSITORY NVIDIA/cuCollections
+     GIT_TAG dev
+     OPTIONS
+       "BUILD_TESTS OFF"
+       "BUILD_BENCHMARKS OFF"
+       "BUILD_EXAMPLES OFF"
+   )
+  target_link_libraries(dgl cuco)
+
+  add_compile_definitions(USE_CUCO)
+endif(USE_CUDA)
+
 set_property(TARGET dgl PROPERTY CXX_STANDARD 14)
 
 # include directories
