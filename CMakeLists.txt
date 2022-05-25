@@ -206,6 +206,7 @@ endif(USE_CUDA)
 
 if(USE_CUDA)
   include(cmake/util/CPM.cmake)
+  enable_language(CUDA)
 
   CPMAddPackage(
      NAME cuco
