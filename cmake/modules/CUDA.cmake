@@ -270,11 +270,11 @@ macro(dgl_config_cuda out_variable)
   list(APPEND CUDA_NVCC_FLAGS "--expt-extended-lambda;-Wno-deprecated-declarations")
 
 
-  # 3. CUDA 11 requires c++14 by default
+  # 3. CUDA 11 requires c++14 by default while cuco requires c++17
   include(CheckCXXCompilerFlag)
-  check_cxx_compiler_flag("-std=c++14"    SUPPORT_CXX14)
+  check_cxx_compiler_flag("-std=c++17"    SUPPORT_CXX17)
   string(REPLACE "-std=c++11" "" CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS}")
-  list(APPEND CUDA_NVCC_FLAGS "-std=c++14")
+  list(APPEND CUDA_NVCC_FLAGS "-std=c++17")
 
   message(STATUS "CUDA flags: ${CUDA_NVCC_FLAGS}")
 
